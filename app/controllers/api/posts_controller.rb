@@ -9,8 +9,12 @@ class Api::PostsController < ApplicationController
     term = params[:term]
     return index if term.blank?
 
-    @posts = Post.where('title ILIKE ?', "%#{term}%") # TODO: sanitize_sql_like?
-    # @posts = Post.join(:tags).where(tags: {})
+    # TODO: sanitize_sql_like not working?
+    # TODO: distinct necessary?
+    @posts = Post.joins(:tags).where('title ILIKE ?', "%#{term}%").or(
+      Post.where(tags: { name: term })
+    ).distinct
+    # Article.joins(:categories).where(categories: { id: 2 } )
     render json: serialize_posts(@posts)
   end
 
@@ -25,4 +29,3 @@ class Api::PostsController < ApplicationController
   end
 end
 
-# Article.join(:categories).where(categories: { id: 2 } )

@@ -27,9 +27,10 @@ RSpec.describe 'Post' do
 
       get api_posts_search_path(term:)
       expect(response).to be_successful
-      puts response.body
+      puts response.body # FIXME: remove
       json = JSON.parse(response.body)
       expect(json).to be_a(Array)
+      expect(json.length).to be(2)
       expect(json[0]['title']).to match(/#{term}/i)
       # expect(json[0]['tags'].count).to eq(post.tags.count)
       # expect(json[0]['tags'].first['name']).to eq(post.tags.first.name)
