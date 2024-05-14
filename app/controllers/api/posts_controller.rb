@@ -5,13 +5,17 @@ class Api::PostsController < ApplicationController
     render json: serialize_posts(@posts)
   end
 
-  def search()
+  def search
+    term = params[:term]
+    return index if term.blank?
+
+    @posts = Post.where('title ILIKE ?', "%#{term}%") # TODO: sanitize_sql_like?
     # @posts = Post.join(:tags).where(tags: {})
-    render json: []
+    render json: serialize_posts(@posts)
   end
 
   def serialize_posts(posts)
-    @posts.map do |post|
+    posts.map do |post|
       {
         title: post.title,
         id: post.id,
