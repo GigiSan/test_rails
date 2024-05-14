@@ -5,6 +5,11 @@ class Api::PostsController < ApplicationController
     render json: serialize_posts(@posts)
   end
 
+  def search()
+    # @posts = Post.join(:tags).where(tags: {})
+    render json: nil
+  end
+
   def serialize_posts(posts)
     @posts.map do |post|
       {
@@ -15,3 +20,5 @@ class Api::PostsController < ApplicationController
     end
   end
 end
+
+# Article.join(:categories).where(categories: { id: 2 } )

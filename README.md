@@ -19,6 +19,7 @@ bin/webpack-dev-server
 Per avviare i test:
 
 ```bash
+RAILS_ENV=test rails db:create db:migrate
 bundle exec rspec
 ```
 
