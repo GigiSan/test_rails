@@ -23,8 +23,8 @@ RSpec.describe 'Post' do
       get api_posts_search_path(term: 'gatto')
       expect(response).to be_successful
 
-      # json = JSON.parse(response.body)
-      # expect(json).to be_a(Array)
+      json = JSON.parse(response.body)
+      expect(json).to be_a(Array)
       # expect(json[0]['title']).to eq(post.title)
       # expect(json[0]['tags'].count).to eq(post.tags.count)
       # expect(json[0]['tags'].first['name']).to eq(post.tags.first.name)

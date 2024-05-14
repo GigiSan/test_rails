@@ -7,7 +7,7 @@ class Api::PostsController < ApplicationController
 
   def search()
     # @posts = Post.join(:tags).where(tags: {})
-    render json: nil
+    render json: []
   end
 
   def serialize_posts(posts)
