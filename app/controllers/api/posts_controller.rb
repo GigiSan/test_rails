@@ -14,7 +14,6 @@ class Api::PostsController < ApplicationController
     @posts = Post.joins(:tags).where('title ILIKE ?', "%#{term}%").or(
       Post.where(tags: { name: term })
     ).distinct
-    # Article.joins(:categories).where(categories: { id: 2 } )
     render json: serialize_posts(@posts)
   end
 
@@ -28,4 +27,3 @@ class Api::PostsController < ApplicationController
     end
   end
 end
-
